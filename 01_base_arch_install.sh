@@ -78,4 +78,5 @@ bootctl --path=/boot update
 echo "uncomment this line in /etc/sudoers:
 %wheel ALL=(ALL) ALL
 "
-echo "Please reboot, and run 02_userspace.sh"
+echo "Please reboot, and run 02_userspace.sh
+https://raw.githubusercontent.com/WnndGws/warbs/master/02_userspace.sh"

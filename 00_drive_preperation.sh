@@ -16,5 +16,5 @@ Partition   Space   Type
 /dev/sda2   xG      Linux Filesystem
 "
 
-echo "curl <++>
+echo "curl https://raw.githubusercontent.com/WnndGws/warbs/master/01_base_arch_install.sh
 Run 01_base_arch_install.sh"
