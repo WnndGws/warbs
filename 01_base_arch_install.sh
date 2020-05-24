@@ -75,6 +75,11 @@ console-mode  max" > /boot/loader/loader.conf
 
 bootctl --path=/boot update
 
+# Add user
+groupadd mediamgmt
+useradd --create-home -G wheel -G audio -G video -G mediamgmt --shell /bin/zsh wynand
+passwd wynand
+
 echo "uncomment this line in /etc/sudoers:
 %wheel ALL=(ALL) ALL
 "
