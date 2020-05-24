@@ -5,6 +5,7 @@
 # Get user input
 read -p "What is the drive you want arch installed on (in the form /dev/sda)?: " drive
 read -p "What is the hostname?: " hostname
+read -p "What is the username?: " username
 
 # Setup network connection
 wifi-menu
@@ -77,8 +78,8 @@ bootctl --path=/boot update
 
 # Add user
 groupadd mediamgmt
-useradd --create-home -G wheel -G audio -G video -G mediamgmt --shell /bin/zsh wynand
-passwd wynand
+useradd --create-home -G wheel -G audio -G video -G mediamgmt --shell /bin/zsh $username
+passwd $username
 
 echo "uncomment this line in /etc/sudoers:
 %wheel ALL=(ALL) ALL
