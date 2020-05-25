@@ -10,7 +10,7 @@ echo "Please do the following manually:
 
 echo "Next do the the following manually:
 1) Run cgdisk 'cgdisk /dev/sdX'
-2) Create a parition table as such:
+2) Create a partition table as such:
 Partition   Space   Type
 /dev/sda1   512M    EFI System
 /dev/sda2   xG      Linux Filesystem
