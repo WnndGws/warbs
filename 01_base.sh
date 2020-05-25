@@ -47,6 +47,8 @@ swapon /dev/mapper/vg0-swap
 
 # Pacstrap
 echo "Initialising pacstrap...."
+curl "https://www.archlinux.org/mirrorlist/?country=AU&protocol=http&protocol=https&ip_version=4" > /etc/mirrorlist
+pacman -Syy
 pacstrap /mnt base base-devel linux linux-firmware netctl git zsh vim dialog wpa_supplicant dhcpcd openssh lvm2
 
 # Fstab

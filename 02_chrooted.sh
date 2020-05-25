@@ -44,7 +44,11 @@ console-mode  max" > /boot/loader/loader.conf
 
 bootctl --path=/boot update
 
+echo "Set root password...."
+passwd
+
 # Add user
+echo "Adding user...."
 groupadd mediamgmt
 useradd --create-home -G wheel -G audio -G video -G mediamgmt --shell /bin/zsh $username
 passwd $username
