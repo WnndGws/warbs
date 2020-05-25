@@ -5,6 +5,7 @@
 # Get user input
 read -p "What is the hostname?: " hostname
 read -p "What is the username?: " username
+read -p "What is the drive again? (in the form /dev/sda): " drive
 
 # Initial locales
 echo "Setting up locale...."

@@ -53,6 +53,8 @@ pacstrap /mnt base base-devel linux linux-firmware netctl git zsh vim dialog wpa
 
 # Fstab
 genfstab -U /mnt >> /mnt/etc/fstab
+#Might need to use, we will see
+#genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "System will now chroot onto /mnt
 Please curl <++>02 and run that next
