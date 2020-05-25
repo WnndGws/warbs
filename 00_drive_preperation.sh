@@ -1,5 +1,5 @@
 #!/bin/sh
-# Installs arch linux on the selected drive with LUkS
+# Installs arch linux on the selected drive with LUKS
 # Setup relies on: systemd-boot, UEFI, LVM and luks, netctl, Xorg, bspwm
 
 echo "Please do the following manually:
