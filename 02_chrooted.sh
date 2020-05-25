@@ -24,7 +24,7 @@ echo "127.0.0.1 localhost
 ::1 localhost
 127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 
-# Edit mkinitcpio to move 'keyboard to bfore filesystems, and include encryption
+# Edit mkinitcpio to move 'keyboard to before filesystems, and include encryption
 echo "Setting up mkinitcpio...."
 sed -i 's/\ keyboard//g' /etc/mkinitcpio.conf
 sed -i 's/filesystems/keyboard\ encrypt\ lvm2\ resume\ filesystems/g' /etc/mkinitcpio.conf
