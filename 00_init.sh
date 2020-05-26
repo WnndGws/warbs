@@ -16,7 +16,7 @@ Partition   Space   Type
 /dev/sda2   xG      Linux Filesystem
 EOF
 
-curl https://raw.githubusercontent.com/WnndGws/warbs/master/01_base_install.sh > 01.sh
+curl https://raw.githubusercontent.com/WnndGws/warbs/master/01_base.sh > 01.sh
 chmod +x 01.sh
 
 echo "Please run 01.sh"

@@ -66,6 +66,8 @@ swapon /dev/mapper/vg0-swap
 # Pacstrap
 echo "Initialising pacstrap...."
 curl "https://www.archlinux.org/mirrorlist/?country=AU&protocol=http&protocol=https&ip_version=4" > /etc/pacman.d/mirrorlist
+#Removes initial # from curl-ed file
+sed -i 's/^.//' /etc/pacman.d/mirrorlist
 pacman -Syy
 pacstrap /mnt base base-devel linux linux-firmware iwd git zsh vim dhcpcd openssh lvm2 man-db man-pages texinfo
 
