@@ -73,10 +73,11 @@ passwd
 echo "Adding user...."
 groupadd mediamgmt
 useradd --create-home -G wheel -G audio -G video -G mediamgmt --shell /bin/zsh $USER_NAME
+echo "Passwd for $USER_NAME...."
 passwd $USER_NAME
 
-echo "uncomment this line in /etc/sudoers:
-%wheel ALL=(ALL) ALL
-"
+echo "Adding %wheel to sudoers file...."
+sed -i 's/^# %wheel ALL=(ALL) ALL$/%wheel ALL=(ALL) ALL/' /etc/sudoers
+
 echo "Please reboot, and run 03_userspace.sh
 <++>03_userspace"

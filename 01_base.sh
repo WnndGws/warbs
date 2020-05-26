@@ -22,6 +22,13 @@ TIMEZONE="Australia/Perth"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
 
+echo "Did you make EXTRA sure the the variables in 01.sh are correct?"
+select yn in "Yes" "No"
+case $yn in
+    Yes ) continue;;
+    No ) exit;;
+esac
+
 echo "Turning off that fucking beep...."
 rmmod pcspkr
 
