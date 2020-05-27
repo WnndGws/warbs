@@ -15,6 +15,7 @@ USER_NAME="wynand"
 TIMEZONE="Australia/Perth"
 
 # Choose your video driver
+# Run `lspci | grep VGA` for video driver info
 # For Intel
 #VIDEO_DRIVER="i915"
 # For nVidia
@@ -23,6 +24,13 @@ TIMEZONE="Australia/Perth"
 #VIDEO_DRIVER="amdgpu"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
+
+# Choose and uncomment you CPU microcode
+# Run `lscpu` for more info
+# For Intel
+#MICROCODE="intel-ucode"
+# For AMD
+#MICROCODE="amd-ucode"
 
 echo "Did you make EXTRA sure the the variables in 01.sh are correct?"
 select yn in "Yes" "No"; do
@@ -63,6 +71,7 @@ bootctl --path=/boot install
 cat > /boot/loader/entries/arch.conf <<EOF
 title Arch Linux
 linux /vmlinuz-linux
+initrd "$MICROCODE".img
 initrd /initramfs-linux.img
 options cryptdevice=UUID=$(blkid -s UUID -o value "$DRIVE"2):cryptlvm root=/dev/mapper/vg0-root quiet rw
 EOF
