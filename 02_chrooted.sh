@@ -81,7 +81,8 @@ passwd
 # Add user
 echo "Adding user...."
 groupadd mediamgmt
-useradd --create-home -G wheel -G audio -G video -G mediamgmt --shell /bin/zsh $USER_NAME
+# Note no need to add user to the audio or video groups as in the past, as udev now handles permissions for us.
+useradd --create-home --gid users --groups wheel --groups mediamgmt --shell /bin/zsh $USER_NAME
 echo "Passwd for $USER_NAME...."
 passwd $USER_NAME
 
