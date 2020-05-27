@@ -95,7 +95,6 @@ Please curl <++>02 and run that next
 "
 
 #Copy files needed for next part
-cp warbs.conf /mnt
 curl https://raw.githubusercontent.com/WnndGws/warbs/master/02_chrooted.sh > /mnt/02.sh
 chmod +x /mnt/02.sh
 
