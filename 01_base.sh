@@ -22,6 +22,13 @@ TIMEZONE="Australia/Perth"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
 
+# Choose and uncomment you CPU microcode
+# Run `lscpu` for more info
+# For Intel
+#MICROCODE="intel-ucode"
+# For AMD
+#MICROCODE="amd-ucode"
+
 echo "Did you make EXTRA sure the the variables in 01.sh are correct?"
 select yn in "Yes" "No"; do
     case $yn in
@@ -78,7 +85,7 @@ curl "https://www.archlinux.org/mirrorlist/?country=AU&protocol=http&protocol=ht
 #Removes initial # from curl-ed file
 sed -i 's/^.//' /etc/pacman.d/mirrorlist
 pacman -Syy
-pacstrap /mnt base base-devel linux linux-firmware iwd git zsh vim dhcpcd openssh lvm2 man-db man-pages texinfo
+pacstrap /mnt base base-devel linux linux-firmware iwd git zsh vim dhcpcd openssh lvm2 man-db man-pages texinfo "$MICROCODE"
 
 # Fstab
 genfstab -U /mnt >> /mnt/etc/fstab
