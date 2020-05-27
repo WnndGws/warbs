@@ -98,5 +98,8 @@ passwd $USER_NAME
 echo "Adding %wheel to sudoers file...."
 sed -i 's/^# %wheel ALL=(ALL) ALL$/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
-echo "Please reboot, and run 03_userspace.sh
-<++>03_userspace"
+curl https://raw.githubusercontent.com/WnndGws/warbs/master/03_userspace.sh >> /home/"$USER_NAME"/03.sh
+chmod +x /home/"$USER_NAME"/03.sh
+
+clear
+echo "Please reboot, and run $HOME/03.sh for Userspace install"
