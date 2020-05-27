@@ -3,7 +3,7 @@
 # Setup relies on: systemd-boot, UEFI, LVM and luks, netctl, Xorg, bspwm
 
 # Drive paritions to install to.
-DRIVE="/dev/sda"
+DRIVE="/dev/sde"
 
 # Hostname of installed machine
 HOSTNAME="desk-ARCH"
@@ -23,6 +23,15 @@ TIMEZONE="Australia/Perth"
 #VIDEO_DRIVER="amdgpu"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
+
+echo "Did you make EXTRA sure the the variables in 01.sh are correct?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) continue;;
+        No ) exit;;
+        *) echo "Select 1 or 2...."
+    esac
+done
 
 # Initial locales
 echo "Setting up locale...."
