@@ -35,7 +35,7 @@ TIMEZONE="Australia/Perth"
 echo "Did you make EXTRA sure the the variables in 01.sh are correct?"
 select yn in "Yes" "No"; do
     case $yn in
-        Yes ) continue;;
+        Yes ) break;;
         No ) exit;;
         *) echo "Select 1 or 2...."
     esac
