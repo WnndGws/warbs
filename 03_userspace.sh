@@ -5,11 +5,11 @@ lspci | grep VGA
 echo "Do you have an Intel, NVidia, AMD, or generic GPU? "
 select driver in "Intel" "NVidia" "AMD" "Generic"; do
     case $driver in
-        Intel ) VIDEO_DRIVER="xf86-video-i915";;
-        NVidia ) VIDEO_DRIVER="xf86-video-nouveau";;
-        AMD ) VIDEO_DRIVER="xf86-video-amdgpu";;
-        Generic ) VIDEO_DRIVER="xf86-video-vesa;;
-        * ) echo "Please select 1-4"
+        Intel ) VIDEO_DRIVER="xf86-video-i915" ;;
+        NVidia ) VIDEO_DRIVER="xf86-video-nouveau" ;;
+        AMD ) VIDEO_DRIVER="xf86-video-amdgpu" ;;
+        Generic ) VIDEO_DRIVER="xf86-video-vesa" ;;
+        * ) echo "Please select 1-4" ;;
     esac
 done
 
