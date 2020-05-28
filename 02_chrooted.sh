@@ -2,42 +2,33 @@
 # Installs arch linux on the selected drive with LUkS
 # Setup relies on: systemd-boot, UEFI, LVM and luks, netctl, Xorg, bspwm
 
+echo "Some questions will be re-asked. This is because we are in a new envirnment where old settings didnt carry over"
+echo "PLEASE GIVE THE SAME ANSWERS UNLESS YOU KNOW WHAT YOU'RE DOING"
+
 # Drive paritions to install to.
-DRIVE="/dev/sde"
+#DRIVE="/dev/sde"
+clear
+lsblk
+echo "What is the drive you installed on in the form '/dev/sda'"
+echo "This is where we will install the bootloader"
+read DRIVE
 
 # Hostname of installed machine
-HOSTNAME=""
+read -p "What hostname would you like to set? " HOSTNAME
 
 # Main user to create (by default, added to wheel group, and others).
-USER_NAME=""
+read -p "What USER would you like to add? " USER_NAME
 
 # System timezone.
-TIMEZONE="Australia/Perth"
+read -p "What is your timezone in the form 'Country/Region'? " TIMEZONE
 
-# Choose your video driver
-# Run `lspci | grep VGA` for video driver info
-# For Intel
-#VIDEO_DRIVER="i915"
-# For nVidia
-#VIDEO_DRIVER="nouveau"
-# For ATI
-#VIDEO_DRIVER="amdgpu"
-# For generic stuff
-#VIDEO_DRIVER="vesa"
-
-# Choose and uncomment you CPU microcode
-# Run `lscpu` for more info
-# For Intel
-#MICROCODE="intel-ucode"
-# For AMD
-#MICROCODE="amd-ucode"
-
-echo "Did you make EXTRA sure the the variables in 01.sh are correct?"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) break;;
-        No ) exit;;
-        *) echo "Select 1 or 2...."
+lscpu
+echo "Do you have an Intel or AMD CPU? "
+select intelamd in "Intel" "AMD"; do
+    case $intelamd in
+        Intel ) MICROCODE="intel-ucode";;
+        AMD ) MICROCODE="amd-ucode";;
+        * ) echo "Please select 1 or 2"
     esac
 done
 
@@ -84,14 +75,18 @@ EOF
 
 bootctl --path=/boot update
 
+clear
 echo "Set root password...."
 passwd
 
 # Add user
+clear
 echo "Adding user...."
 groupadd mediamgmt
 # Note no need to add user to the audio or video groups as in the past, as udev now handles permissions for us.
-useradd --create-home --gid users --groups wheel --groups mediamgmt --shell /bin/zsh $USER_NAME
+useradd --create-home --gid users --groups mediamgmt --shell /bin/zsh $USER_NAME
+# Adding to wheel after creating as it was not adding propperly for some reason
+usermod -a -G  wheel $USER_NAME
 echo "Passwd for $USER_NAME...."
 passwd $USER_NAME
 
