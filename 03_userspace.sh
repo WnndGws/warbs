@@ -9,6 +9,63 @@ sudo rm /02.sh
 # Wifi
 echo "Setting up WiFi...."
 echo "Many of these files are readonly unless super user"
+sudo su -
+
+ip link set wlan0 up
+systemctl enable --now systemd-networkd.service
+systemctl enable --now systemd-resolved.service
+systemctl enable --now iwd.service
+
+echo "Creating iwd's main.conf...."
+cat > /etc/iwd/main.conf <<EOF
+[Scan]
+# Disable periodic scanning for new networks
+DisablePeriodScan=true
+
+[General]
+EnableNetworkConfiguration=true
+
+[Network]
+NameResolvingService=systemd
+EOF
+
+cat > /etc/systemd/network/wifi.network <<EOF
+[Match]
+Name=wlan*
+
+[Network]
+# TODO: Check that yes works, since know 'ipv4' works
+DHCP=yes
+IPv6PrivacyExtensions=true
+EOF
+
+# Links the systemd-resolved stub to resolv.conf incase theres any programs that still need to check resolv.conf
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+cat > /etc/systemd/resolved.conf <<EOF
+[Resolve]
+DNS=1.1.1.1 9.9.9.9
+Domains=~.
+FallbackDNS=
+DNSOverTLS=yes
+EOF
+
+#exit su
+exit
+
+iwctl station wlan0 scan
+iwctl station wlan0 get-networks
+read -p "What <SSID> would you like to connect to?" SSID
+iwctl station wlan0 connect "$SSID"
+
+echo "If you would like to set a static IP address on the machine do the following:
+Edit /var/lib/iwd/<SSID>.psk
+> [IPv4]
+> ip=192.168.1.100
+> netmask=255.255.255.0
+> gateway=192.168.1.1
+> broadcast=192.168.1.20
+"
 
 # Step 2
 # Video drivers + xorg
