@@ -22,15 +22,14 @@ sudo rm /02.sh
 # Wifi
 echo "Setting up WiFi...."
 echo "Many of these files are readonly unless super user"
-sudo su -
 
-ip link set wlan0 up
-systemctl enable --now systemd-networkd.service
-systemctl enable --now systemd-resolved.service
-systemctl enable --now iwd.service
+sudo ip link set wlan0 up
+sudo systemctl enable --now systemd-networkd.service
+sudo systemctl enable --now systemd-resolved.service
+sudo systemctl enable --now iwd.service
 
 echo "Creating iwd's main.conf...."
-cat > /etc/iwd/main.conf <<EOF
+sudo cat > /etc/iwd/main.conf <<EOF
 [Scan]
 # Disable periodic scanning for new networks
 DisablePeriodScan=true
@@ -42,7 +41,7 @@ EnableNetworkConfiguration=true
 NameResolvingService=systemd
 EOF
 
-cat > /etc/systemd/network/wifi.network <<EOF
+sudo cat > /etc/systemd/network/wifi.network <<EOF
 [Match]
 Name=wlan*
 
@@ -53,18 +52,15 @@ IPv6PrivacyExtensions=true
 EOF
 
 # Links the systemd-resolved stub to resolv.conf incase theres any programs that still need to check resolv.conf
-ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
-cat > /etc/systemd/resolved.conf <<EOF
+sudo cat > /etc/systemd/resolved.conf <<EOF
 [Resolve]
 DNS=1.1.1.1 9.9.9.9
 Domains=~.
 FallbackDNS=
 DNSOverTLS=yes
 EOF
-
-#exit su
-exit
 
 iwctl station wlan0 scan
 iwctl station wlan0 get-networks
@@ -83,9 +79,9 @@ Edit /var/lib/iwd/<SSID>.psk
 # Step 2
 # Video drivers + xorg
 echo "Updating system before continuing...."
-pacman -Syyu
+sudo pacman -Syyu
 clear
-pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit
+sudo pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit
 
 # Step 3
 # SSH and GPG
