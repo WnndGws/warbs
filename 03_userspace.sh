@@ -146,6 +146,31 @@ mkdir $XDG_CACHE_HOME/zsh
 
 # Step 5
 # SSH and GPG
+mkdir $XDG_CONFIG_HOME/gnupg
+printf 'We are past the automatic stage, the rest has to be done manually.
+
+We will set up a gpg key
+The primary key should be for signing and certification only. The suggested usage of GPG is to create a subkey for encryption. This subkey is a separate key that, for all intents and purposes, is signed by your primary key and transmitted at the same time. This practice allows you to revoke the encryption subkey on its own, such as if it becomes compromised, while keeping your primary key valid.
+To create a new key run:
+* `gpg --full-generate-key --expert`
+* Select RSA (Set your own capabilities) and check it can sign and certify only
+
+To import a key run:
+* `gpg import key.asc`
+
+The rest of the steps are the same.
+
+Next need to generate subkeys. One for authentication only to use with ssh, and one for encryption only
+* `gpg --expert --edit-key <KEY-ID>`
+* addkey, select RSA (Set your own capabilities), and follow promts to make these two subkeys
+
+To unlok the authentication key for the whole session run
+* `gpg --with-keygrip -k`
+* `/usr/lib/gnupg/gpg-preset-passphrase --preset <KEYGRIP>`
+* `echo <KEYGRIP> >> $XDG_CONFIG_HOME/gnupg/sshcontrol`
+
+The rest should be handled correctly by .zshenv file
+'
 
 # Step 6
 # Set up firefox
