@@ -11,6 +11,7 @@ select driver in "Intel" "NVidia" "AMD" "Generic"; do
         Generic ) VIDEO_DRIVER="xf86-video-vesa" ;;
         * ) echo "Please select 1-4" ;;
     esac
+    break
 done
 
 # Remove 02.sh used for install
