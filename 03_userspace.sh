@@ -79,6 +79,10 @@ Edit /var/lib/iwd/<SSID>.psk
 > broadcast=192.168.1.20
 "
 
+sudo systemctl restart systemd-networkd.service
+sudo systemctl restart systemd-resolved.service
+sudo systemctl restart iwd.service
+
 # Step 2
 # Video drivers + xorg
 echo "Updating system before continuing...."
