@@ -1,7 +1,7 @@
 #!/bin/env zsh
 ## Using zsh since that us my user shell, but also so we can use bash-isms
 
-lspci | grep VGA
+lspci | grep -i 'vga\|3d\|2d'
 echo "Do you have an Intel, NVidia, AMD, or generic GPU? "
 select driver in "Intel" "NVidia" "AMD" "Generic"; do
     case $driver in
