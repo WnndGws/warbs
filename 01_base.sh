@@ -4,37 +4,26 @@
 # Setup relies on: systemd-boot, UEFI, LVM and luks, netctl, Xorg, bspwm
 
 # Drive paritions to install to.
-DRIVE="/dev/sde"
+#DRIVE="/dev/sde"
+clear
+lsblk
+echo "What is the drive you want to format and install in the form '/dev/sda'"
+echo "WARNING: THIS DRIVE WILL BE NUKED"
+read DRIVE
 
 # Hostname of installed machine
-HOSTNAME="desk-ARCH"
+read -p "What hostname would you like to set? " HOSTNAME
 
 # System timezone.
-TIMEZONE="Australia/Perth"
+read -p "What is your timezone in the form 'Country/Region'? " TIMEZONE
 
-# Choose your video driver
-# For Intel
-#VIDEO_DRIVER="i915"
-# For nVidia
-#VIDEO_DRIVER="nouveau"
-# For ATI
-#VIDEO_DRIVER="amdgpu"
-# For generic stuff
-#VIDEO_DRIVER="vesa"
-
-# Choose and uncomment you CPU microcode
-# Run `lscpu` for more info
-# For Intel
-#MICROCODE="intel-ucode"
-# For AMD
-#MICROCODE="amd-ucode"
-
-echo "Did you make EXTRA sure the the variables in 01.sh are correct?"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) break;;
-        No ) exit;;
-        *) echo "Select 1 or 2...."
+lscpu
+echo "Do you have an Intel or AMD cpu? "
+select intelamd in "Intel" "AMD"; do
+    case $intelamd in
+        Intel ) MICROCODE="intel-ucode";;
+        AMD ) MICROCODE="amd-ucode";;
+        * ) echo "Please select 1 or 2"
     esac
 done
 
