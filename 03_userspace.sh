@@ -1,6 +1,18 @@
 #!/bin/env zsh
 ## Using zsh since that us my user shell, but also so we can use bash-isms
 
+lspci | grep VGA
+echo "Do you have an Intel, NVidia, AMD, or generic GPU? "
+select driver in "Intel" "NVidia" "AMD" "Generic"; do
+    case $driver in
+        Intel ) VIDEO_DRIVER="xf86-video-i915";;
+        NVidia ) VIDEO_DRIVER="xf86-video-nouveau";;
+        AMD ) VIDEO_DRIVER="xf86-video-amdgpu";;
+        Generic ) VIDEO_DRIVER="xf86-video-vesa;;
+        * ) echo "Please select 1-4"
+    esac
+done
+
 # Remove 02.sh used for install
 echo "Removing 02.sh from root directory...."
 sudo rm /02.sh
@@ -69,6 +81,10 @@ Edit /var/lib/iwd/<SSID>.psk
 
 # Step 2
 # Video drivers + xorg
+echo "Updating system before continuing...."
+pacman -Syyu
+clear
+pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit
 
 # Step 3
 # SSH and GPG
