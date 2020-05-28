@@ -90,6 +90,26 @@ sudo pacman -Syyu
 clear
 sudo pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit
 
+# Enable ntp
+echo 'enabling NTP....'
+sudo bash -c 'cat > /etc/systemd/timesyncd.conf <<EOF
+[Time]
+NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+RootDistanceMaxSec=5
+PollIntervalMinSec=32
+PollIntervalMaxSec=2048
+EOF'
+sudo systemctl enable --now systemd-timesyncd.service
+sudo timedatectl set-ntp=true
+
+echo "installing pikaur...."
+git clone https://aur.archlinux.org/pikaur.git
+cd pikaur
+makepkg --force --syncdeps --rmdeps --install
+cd ..
+rm -rf pikaur
+
 # Step 3
 # SSH and GPG
 
