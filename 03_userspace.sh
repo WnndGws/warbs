@@ -115,7 +115,7 @@ rm -rf pikaur
 pikaur -S alacritty bspwm sxhkd firefox mpv youtube-dl newsboat nerd-fonts-cascadia-code \
 rofi ripgrep fd bat neofetch exa entr feh neovim lemonbar-xft-git \
 pulseaudio-alsa pulsemixer pamixer unclutter-xfixes-git xclip zathura zathura-pdf-mupdf \
-fzf xmodmap zsh-autosuggestions find-the-command zsh-syntax-highlighting tealdeer zsh-search-history-substring
+fzf xorg-xmodmap zsh-autosuggestions find-the-command zsh-syntax-highlighting tealdeer zsh-history-substring-search
 
 # Step 4
 # SSH and GPG
