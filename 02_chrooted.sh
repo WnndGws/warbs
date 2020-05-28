@@ -11,7 +11,7 @@ clear
 lsblk
 echo "What is the drive you installed on in the form '/dev/sda'"
 echo "This is where we will install the bootloader"
-read DRIVE
+read -p "Drive: " DRIVE
 
 # Hostname of installed machine
 read -p "What hostname would you like to set? " HOSTNAME
@@ -26,9 +26,9 @@ lscpu
 echo "Do you have an Intel or AMD CPU? "
 select intelamd in "Intel" "AMD"; do
     case $intelamd in
-        Intel ) MICROCODE="intel-ucode";;
-        AMD ) MICROCODE="amd-ucode";;
-        * ) echo "Please select 1 or 2"
+        Intel ) MICROCODE="intel-ucode" ;;
+        AMD ) MICROCODE="amd-ucode" ;;
+        * ) echo "Please select 1 or 2" ;;
     esac
 done
 
