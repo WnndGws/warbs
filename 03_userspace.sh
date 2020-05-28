@@ -4,6 +4,8 @@
 echo "Turning off that fucking beep...."
 rmmod pcspkr
 
+read -p "What USER are you logged in as? " USER_NAME
+
 lspci | grep -i 'vga\|3d\|2d'
 echo "Do you have an Intel, NVidia, AMD, or generic GPU? "
 select driver in "Intel" "NVidia" "AMD" "Generic"; do
@@ -112,16 +114,38 @@ rm -rf pikaur
 
 # Step 3
 # Install all utilities I use frequently including my Window Manager
-pikaur -S alacritty bspwm sxhkd firefox mpv youtube-dl newsboat nerd-fonts-cascadia-code \
-rofi ripgrep fd bat neofetch exa entr feh neovim lemonbar-xft-git \
+pikaur -S alacritty bspwm sxhkd firefox mpv youtube-dl newsboat nerd-fonts-cascadia-code fasd \
+rofi ripgrep fd bat neofetch exa entr feh neovim lemonbar-xft-git git-crypt starship stow \
 pulseaudio-alsa pulsemixer pamixer unclutter-xfixes-git xclip zathura zathura-pdf-mupdf \
 fzf xorg-xmodmap zsh-autosuggestions find-the-command zsh-syntax-highlighting tealdeer zsh-history-substring-search
 
+# Need to create a pacman database for find-the-command to work
+sudo pacman -Fy
+sudo systemct enable --now pacman-files.timer
+
 # Step 4
-# SSH and GPG
+# Pull and stow dotfiles
+# Set ZSH to use XDG base
+sudo bash -c 'cat > /etc/zsh/zshenv <<EOF
+ZDOTDIR=/home/$USER_NAME/.config/zsh
+EOF'
+
+mkdir ~/git && cd ~/git
+git clone https://github.com/wnndgws/scripts.git
+git clone https://github.com/wnndgws/dotfiles.git
+cd ~/git/dotfiles
+for i in $(ls); do
+    stow --restow --target=$HOME $i
+done
+
+mkdir $XDG_DATA_HOME/vim
+mkdir $XDG_DATA_HOME/vim/{undo,swap,backup,view}
+mkdir $XDG_CACHE_HOME/zsh
+
+## TODO, move away from polybar to lemonbar
 
 # Step 5
-# Pull and stow dotfiles
+# SSH and GPG
 
 # Step 6
 # Set up firefox
