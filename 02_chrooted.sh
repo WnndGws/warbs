@@ -30,6 +30,7 @@ select intelamd in "Intel" "AMD"; do
         AMD ) MICROCODE="amd-ucode" ;;
         * ) echo "Please select 1 or 2" ;;
     esac
+    break
 done
 
 # Initial locales
