@@ -143,6 +143,7 @@ mkdir $XDG_DATA_HOME/vim/{undo,swap,backup,view}
 mkdir $XDG_CACHE_HOME/zsh
 
 ## TODO, move away from polybar to lemonbar
+## TODO, git-crypt unlock
 
 # Step 5
 # SSH and GPG
