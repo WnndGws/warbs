@@ -32,7 +32,7 @@ sudo systemctl enable --now systemd-resolved.service
 sudo systemctl enable --now iwd.service
 
 echo "Creating iwd's main.conf...."
-sudo cat > /etc/iwd/main.conf <<EOF
+sudo bash -c 'cat > /etc/iwd/main.conf <<EOF
 [Scan]
 # Disable periodic scanning for new networks
 DisablePeriodScan=true
@@ -42,9 +42,9 @@ EnableNetworkConfiguration=true
 
 [Network]
 NameResolvingService=systemd
-EOF
+EOF'
 
-sudo cat > /etc/systemd/network/wifi.network <<EOF
+sudo bash -c 'cat > /etc/systemd/network/wifi.network <<EOF
 [Match]
 Name=wlan*
 
@@ -52,18 +52,18 @@ Name=wlan*
 # TODO: Check that yes works, since know 'ipv4' works
 DHCP=yes
 IPv6PrivacyExtensions=true
-EOF
+EOF'
 
 # Links the systemd-resolved stub to resolv.conf incase theres any programs that still need to check resolv.conf
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
-sudo cat > /etc/systemd/resolved.conf <<EOF
+sudo bash -c 'cat > /etc/systemd/resolved.conf <<EOF
 [Resolve]
 DNS=1.1.1.1 9.9.9.9
 Domains=~.
 FallbackDNS=
 DNSOverTLS=yes
-EOF
+EOF'
 
 iwctl station wlan0 scan
 iwctl station wlan0 get-networks
