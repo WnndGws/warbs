@@ -18,9 +18,9 @@ lscpu
 echo "Do you have an Intel or AMD cpu? "
 select intelamd in "Intel" "AMD"; do
     case $intelamd in
-        Intel ) MICROCODE="intel-ucode" ;;
-        AMD ) MICROCODE="amd-ucode" ;;
-        * ) echo "Please select 1 or 2" ;;
+        Intel) MICROCODE="intel-ucode" ;;
+        AMD) MICROCODE="amd-ucode" ;;
+        *) echo "Please select 1 or 2" ;;
     esac
 done
 
