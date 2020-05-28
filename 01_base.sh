@@ -9,7 +9,7 @@ clear
 lsblk
 echo "What is the drive you want to format and install in the form '/dev/sda'"
 echo "WARNING: THIS DRIVE WILL BE NUKED"
-read DRIVE
+read -p "Drive: " DRIVE
 
 # System timezone.
 read -p "What is your timezone in the form 'Country/Region'? " TIMEZONE
