@@ -6,10 +6,10 @@
 DRIVE="/dev/sde"
 
 # Hostname of installed machine
-HOSTNAME="desk-ARCH"
+HOSTNAME=""
 
 # Main user to create (by default, added to wheel group, and others).
-USER_NAME="wynand"
+USER_NAME=""
 
 # System timezone.
 TIMEZONE="Australia/Perth"
