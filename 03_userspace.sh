@@ -114,7 +114,7 @@ rm -rf pikaur
 
 # Step 3
 # Install all utilities I use frequently including my Window Manager
-pikaur -S alacritty bspwm sxhkd firefox mpv youtube-dl newsboat nerd-fonts-cascadia-code fasd \
+pikaur -S alacritty bspwm sxhkd firefox mpv youtube-dl newsboat nerd-fonts-cascadia-code fasd xdo \
 rofi ripgrep fd bat neofetch exa entr feh neovim lemonbar-xft-git git-crypt starship stow trash-cli \
 pulseaudio-alsa pulsemixer pamixer unclutter-xfixes-git xclip zathura zathura-pdf-mupdf dash dashbinsh \
 fzf xorg-xmodmap zsh-autosuggestions find-the-command zsh-syntax-highlighting tealdeer zsh-history-substring-search
