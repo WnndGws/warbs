@@ -165,10 +165,11 @@ Next need to generate subkeys. One for authentication only to use with ssh, and 
 * `gpg --expert --edit-key <KEY-ID>`
 * addkey, select RSA (Set your own capabilities), and follow promts to make these two subkeys
 
-To unlok the authentication key for the whole session run
+To unlock the authentication key for the whole session run
 * `gpg --with-keygrip -k`
 * `/usr/lib/gnupg/gpg-preset-passphrase --preset <KEYGRIP>`
 * `echo <KEYGRIP> >> $XDG_CONFIG_HOME/gnupg/sshcontrol`
+    * NB, MUST HAVE MAIN EY AND SUBEY IN SSHCONTROL FILE
 
 The rest should be handled correctly by .zshenv file
 '
