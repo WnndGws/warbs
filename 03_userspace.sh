@@ -1,5 +1,5 @@
 #!/bin/env zsh
-## Using zsh since that us my user shell, but also so we can use bash-isms
+## Using zsh since that is my user shell, but also so we can use bash-isms
 
 echo "Turning off that fucking beep...."
 rmmod pcspkr
