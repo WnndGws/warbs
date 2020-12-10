@@ -135,14 +135,13 @@ git clone https://github.com/wnndgws/scripts.git
 git clone https://github.com/wnndgws/dotfiles.git
 cd ~/git/dotfiles
 for i in $(ls); do
-    stow --restow --target=$HOME $i
+    stow --restow --target=~ $i
 done
 
-mkdir $XDG_DATA_HOME/vim
-mkdir $XDG_DATA_HOME/vim/{undo,swap,backup,view}
-mkdir $XDG_CACHE_HOME/zsh
+#mkdir $XDG_DATA_HOME/vim
+#mkdir $XDG_DATA_HOME/vim/{undo,swap,backup,view}
+#mkdir $XDG_CACHE_HOME/zsh
 
-## TODO, move away from polybar to lemonbar
 ## TODO, git-crypt unlock
 
 # Step 5
