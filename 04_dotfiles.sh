@@ -18,14 +18,6 @@ git clone git@github.com:wnndgws/scripts.git
 
 cd ~/git/dotfiles
 for i in */; do
-    stow --restow --target=$HOME $i
+    stow --restow --target=~ $i
 done
 zsh
-
-echo "Installing vim plugins. Quit vim to continue"
-vim -c "PlugInstall"
-pikaur -S cmake
-cd $XDG_CONFIG_HOME/vim/plugged/YouCompleteMe
-python3 install.py --all
-
-
