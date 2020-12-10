@@ -10,10 +10,10 @@ lspci | grep -i 'vga\|3d\|2d'
 echo "Do you have an Intel, NVidia, AMD, or generic GPU? "
 select driver in "Intel" "NVidia" "AMD" "Generic"; do
     case $driver in
-        Intel ) VIDEO_DRIVER="xf86-video-i915" ;;
-        NVidia ) VIDEO_DRIVER="xf86-video-nouveau" ;;
-        AMD ) VIDEO_DRIVER="xf86-video-ati" ;;
-        Generic ) VIDEO_DRIVER="xf86-video-vesa" ;;
+        Intel ) VIDEO_DRIVER="xf86-video-i915 mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader vulkan-intel lib32-vulkan-intel" ;;
+        NVidia ) VIDEO_DRIVER="xf86-video-nouveau mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader nvidia-utils lb32-nvidia-utils" ;;
+        AMD ) VIDEO_DRIVER="xf86-video-ati mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader vulkan-radeon lib32-vulkan-radeon" ;;
+        Generic ) VIDEO_DRIVER="xf86-video-vesa mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader" ;;
         * ) echo "Please select 1-4" ;;
     esac
     break
