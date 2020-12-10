@@ -92,7 +92,7 @@ sudo systemctl restart iwd.service
 echo "Adding multilib to pacman.conf for 32 bit support"
 LINESTART=$(grep -Fnr "[multilib]" /etc/pacman.conf | cut -d : -f1)
 LINEEND=$((LINESTART+1))
-sed -i "${LINESTART},${LINEEND} s/^#//" /etc/pacman.conf
+sudo sed -i "${LINESTART},${LINEEND} s/^#//" /etc/pacman.conf
 
 echo "Updating system before continuing...."
 sudo pacman -Syyu
