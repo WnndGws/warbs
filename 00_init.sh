@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env bash
 # Installs arch linux on the selected drive with LUKS
 # Setup relies on: systemd-boot, UEFI, LVM and luks, netctl, Xorg, bspwm
 
