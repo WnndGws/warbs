@@ -1,37 +1,9 @@
-#!/bin/sh
+#!/bin/env bash
 # Installs arch linux on the selected drive with LUkS
 # Setup relies on: systemd-boot, UEFI, LVM and luks, netctl, Xorg, bspwm
 
-echo "Some questions will be re-asked. This is because we are in a new envirnment where old settings didnt carry over"
-echo "PLEASE GIVE THE SAME ANSWERS UNLESS YOU KNOW WHAT YOU'RE DOING"
-
-# Drive paritions to install to.
-#DRIVE="/dev/sde"
-clear
-lsblk
-echo "What is the drive you installed on in the form '/dev/sda'"
-echo "This is where we will install the bootloader"
-read -p "Drive: " DRIVE
-
-# Hostname of installed machine
-read -p "What hostname would you like to set? " HOSTNAME
-
-# Main user to create (by default, added to wheel group, and others).
-read -p "What USER would you like to add? " USER_NAME
-
-# System timezone.
-read -p "What is your timezone in the form 'Country/Region'? " TIMEZONE
-
-lscpu
-echo "Do you have an Intel or AMD CPU? "
-select intelamd in "Intel" "AMD"; do
-    case $intelamd in
-        Intel ) MICROCODE="intel-ucode" ;;
-        AMD ) MICROCODE="amd-ucode" ;;
-        * ) echo "Please select 1 or 2" ;;
-    esac
-    break
-done
+# Source config
+. config.ini
 
 # Initial locales
 echo "Setting up locale...."
@@ -83,11 +55,10 @@ passwd
 # Add user
 clear
 echo "Adding user...."
-groupadd mediamgmt
 # Note no need to add user to the audio or video groups as in the past, as udev now handles permissions for us.
-useradd --create-home --gid users --groups mediamgmt --shell /bin/zsh $USER_NAME
+useradd --create-home --gid users --shell /bin/zsh "$USER_NAME"
 # Adding to wheel after creating as it was not adding propperly for some reason
-usermod -a -G  wheel $USER_NAME
+usermod -a -G  wheel "$USER_NAME"
 echo "Passwd for $USER_NAME...."
 passwd $USER_NAME
 
@@ -96,6 +67,7 @@ sed -i 's/^# %wheel ALL=(ALL) ALL$/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
 curl https://raw.githubusercontent.com/WnndGws/warbs/master/03_userspace.sh >> /home/"$USER_NAME"/03.sh
 chmod +x /home/"$USER_NAME"/03.sh
+curl https://raw.githubusercontent.com/WnndGws/warbs/master/config.ini >> /home/"$USER_NAME"/config.ini
 
 clear
 echo "Please reboot, and run $HOME/03.sh for Userspace install"

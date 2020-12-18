@@ -16,7 +16,16 @@ Partition   Space   Type
 /dev/sda2   xG      Linux Filesystem
 EOF
 
+lscpu
+lspci | grep -i 'vga\|3d\|2d'
+
+cat <<EOF
+UPDATE THE CONFIG FILE
+EOF
+
 curl https://raw.githubusercontent.com/WnndGws/warbs/master/01_base.sh > 01.sh
 chmod +x 01.sh
+
+curl https://raw.githubusercontent.com/WnndGws/warbs/master/config.ini > config.ini
 
 echo "Please run 01.sh"

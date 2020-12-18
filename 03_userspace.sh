@@ -1,27 +1,14 @@
 #!/bin/env zsh
 ## Using zsh since that us my user shell, but also so we can use bash-isms
 
+# Source config
+. ~/config.ini
+
+# Cleanup old file
+sudo /bin/rm -rf /02.sh
+
 echo "Turning off that fucking beep...."
 rmmod pcspkr
-
-read -p "What USER are you logged in as? " USER_NAME
-
-lspci | grep -i 'vga\|3d\|2d'
-echo "Do you have an Intel, NVidia, AMD, or generic GPU? "
-select driver in "Intel" "NVidia" "AMD" "Generic"; do
-    case $driver in
-        Intel ) VIDEO_DRIVER="xf86-video-i915 mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader vulkan-intel lib32-vulkan-intel" ;;
-        NVidia ) VIDEO_DRIVER="xf86-video-nouveau mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader nvidia-utils lb32-nvidia-utils" ;;
-        AMD ) VIDEO_DRIVER="xf86-video-ati mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader vulkan-radeon lib32-vulkan-radeon" ;;
-        Generic ) VIDEO_DRIVER="xf86-video-vesa mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader" ;;
-        * ) echo "Please select 1-4" ;;
-    esac
-    break
-done
-
-# Remove 02.sh used for install
-echo "Removing 02.sh from root directory...."
-sudo rm /02.sh
 
 # Step 1
 # Wifi
@@ -69,7 +56,6 @@ EOF'
 
 iwctl station wlan0 scan
 iwctl station wlan0 get-networks
-read -p "What <SSID> would you like to connect to?" SSID
 iwctl station wlan0 connect "$SSID"
 
 echo "If you would like to set a static IP address on the machine do the following:
@@ -95,9 +81,9 @@ LINEEND=$((LINESTART+1))
 sudo sed -i "${LINESTART},${LINEEND} s/^#//" /etc/pacman.conf
 
 echo "Updating system before continuing...."
-sudo pacman -Syyu
+sudo pacman -Syyuu
 clear
-sudo pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit
+sudo pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader "$VIDEO_DRIVER_2" "$VIDEO_DRIVER_3" mesa-vdpau
 
 # Enable ntp
 echo 'enabling NTP....'
@@ -145,9 +131,7 @@ for i in $(ls); do
     stow --restow --target=~ $i
 done
 
-#mkdir $XDG_DATA_HOME/vim
-#mkdir $XDG_DATA_HOME/vim/{undo,swap,backup,view}
-#mkdir $XDG_CACHE_HOME/zsh
+mkdir $XDG_CACHE_HOME/zsh
 
 ## TODO, git-crypt unlock
 
