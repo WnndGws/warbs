@@ -67,7 +67,7 @@ sed -i 's/^# %wheel ALL=(ALL) ALL$/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
 curl https://raw.githubusercontent.com/WnndGws/warbs/master/03_userspace.sh >> /home/"$USER_NAME"/03.sh
 chmod +x /home/"$USER_NAME"/03.sh
-curl https://raw.githubusercontent.com/WnndGws/warbs/master/config.ini >> /home/"$USER_NAME"/config.ini
+cp config.ini /home/"$USER_NAME"/config.ini
 
 clear
 echo "Please reboot, and run $HOME/03.sh for Userspace install"

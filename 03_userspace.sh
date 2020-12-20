@@ -8,7 +8,7 @@
 sudo /bin/rm -rf /02.sh
 
 echo "Turning off that fucking beep...."
-rmmod pcspkr
+sudo rmmod pcspkr
 
 # Step 1
 # Wifi
@@ -82,7 +82,6 @@ sudo sed -i "${LINESTART},${LINEEND} s/^#//" /etc/pacman.conf
 
 echo "Updating system before continuing...."
 sudo pacman -Syyuu
-clear
 sudo pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader "$VIDEO_DRIVER_2" "$VIDEO_DRIVER_3" mesa-vdpau
 
 # Enable ntp
@@ -96,7 +95,7 @@ PollIntervalMinSec=32
 PollIntervalMaxSec=2048
 EOF'
 sudo systemctl enable --now systemd-timesyncd.service
-sudo timedatectl set-ntp=true
+sudo timedatectl set-ntp true
 
 echo "installing pikaur...."
 git clone https://aur.archlinux.org/pikaur.git

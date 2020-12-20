@@ -64,7 +64,7 @@ Please curl <++>02 and run that next
 #Copy files needed for next part
 curl https://raw.githubusercontent.com/WnndGws/warbs/master/02_chrooted.sh > /mnt/02.sh
 chmod +x /mnt/02.sh
-curl https://raw.githubusercontent.com/WnndGws/warbs/master/config.ini > /mnt/config.ini
+cp config.ini /mnt/config.ini
 
 # arch-chroot
 arch-chroot /mnt
