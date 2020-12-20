@@ -69,9 +69,9 @@ echo "Adding %wheel to sudoers file...."
 sed -i 's/^# %wheel ALL=(ALL) ALL$/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
 # Setup zsh to use XDG
-bash -c 'cat > /etc/zsh/zshenv <<EOF
+cat > /etc/zsh/zshenv <<EOF
 ZDOTDIR=/home/$USER_NAME/.config/zsh
-EOF'
+EOF
 
 curl https://raw.githubusercontent.com/WnndGws/warbs/master/03_userspace.sh >> /home/"$USER_NAME"/03.sh
 chmod +x /home/"$USER_NAME"/03.sh
