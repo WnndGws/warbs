@@ -82,6 +82,7 @@ echo "Adding multilib to pacman.conf for 32 bit support"
 LINESTART=$(grep -Fnr "[multilib]" /etc/pacman.conf | cut -d : -f1)
 LINEEND=$((LINESTART+1))
 sudo sed -i "${LINESTART},${LINEEND} s/^#//" /etc/pacman.conf
+sleep 5
 sudo pacman -Syyuu
 
 # Enable ntp
