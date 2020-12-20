@@ -54,7 +54,7 @@ echo "Initialising pacstrap...."
 curl "https://archlinux.org/mirrorlist/?country=AU&protocol=http&protocol=https&ip_version=4" > /etc/pacman.d/mirrorlist
 #Removes initial # from curl-ed file
 sed -i 's/^.//' /etc/pacman.d/mirrorlist
-pacman -Syyuu
+pacman -Sy
 pacstrap /mnt base base-devel linux linux-firmware iwd git zsh neovim openssh lvm2 man-db man-pages texinfo "$MICROCODE"
 
 # Fstab
