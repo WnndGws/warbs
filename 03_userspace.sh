@@ -80,10 +80,6 @@ LINESTART=$(grep -Fnr "[multilib]" /etc/pacman.conf | cut -d : -f1)
 LINEEND=$((LINESTART+1))
 sudo sed -i "${LINESTART},${LINEEND} s/^#//" /etc/pacman.conf
 
-echo "Updating system before continuing...."
-sudo pacman -Syyuu
-sudo pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader "$VIDEO_DRIVER_2" "$VIDEO_DRIVER_3" mesa-vdpau
-
 # Enable ntp
 echo 'enabling NTP....'
 sudo bash -c 'cat > /etc/systemd/timesyncd.conf <<EOF
@@ -103,6 +99,10 @@ cd pikaur
 makepkg --force --syncdeps --rmdeps --install
 cd ..
 rm -rf pikaur
+
+echo "Updating system before continuing...."
+sudo pacman -Syyuu
+sudo pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader "$VIDEO_DRIVER_2" "$VIDEO_DRIVER_3" mesa-vdpau
 
 # Step 3
 # Install all utilities I use frequently including my Window Manager
