@@ -2,6 +2,9 @@
 # Installs arch linux on the selected drive with LUkS
 # Setup relies on: systemd-boot, UEFI, LVM and luks, netctl, Xorg, bspwm
 
+# Exit if any line errors
+set -e
+
 # Source config
 . config.ini
 

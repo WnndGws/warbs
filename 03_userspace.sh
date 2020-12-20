@@ -1,8 +1,11 @@
-#!/bin/env zsh
+#!/bin/env bash
 ## Using zsh since that us my user shell, but also so we can use bash-isms
 
+# Exit script if anything fails
+set -e
+
 # Source config
-. ~/config.ini
+. config.ini
 
 # Cleanup old file
 sudo /bin/rm -rf /02.sh
@@ -38,7 +41,7 @@ sudo bash -c 'cat > /etc/systemd/network/wifi.network <<EOF
 Name=wlan*
 
 [Network]
-# TODO: Check that yes works, since know 'ipv4' works
+# TODO: Check that yes works, since know ipv4 works
 DHCP=yes
 IPv6PrivacyExtensions=true
 EOF'
@@ -99,9 +102,9 @@ sleep 5
 
 echo "installing pikaur...."
 git clone https://aur.archlinux.org/pikaur.git
-cd pikaur
+cd pikaur || exit
 makepkg --force --syncdeps --rmdeps --install
-cd ..
+cd .. || exit
 rm -rf pikaur
 
 echo "Updating system before continuing...."
@@ -117,7 +120,7 @@ fzf xorg-xmodmap zsh-autosuggestions find-the-command zsh-syntax-highlighting te
 
 # Need to create a pacman database for find-the-command to work
 sudo pacman -Fy
-sudo systemct enable --now pacman-files.timer
+sudo systemctl enable --now pacman-files.timer
 
 # Step 4
 # Pull and stow dotfiles
@@ -130,11 +133,12 @@ mkdir ~/git && cd ~/git
 git clone https://github.com/wnndgws/scripts.git
 git clone https://github.com/wnndgws/dotfiles.git
 cd ~/git/dotfiles
-for i in $(ls); do
-    stow --restow --target=~ $i
+for i in */; do
+    stow --restow --target="$HOME"~ "$i"
 done
 
-mkdir $XDG_CACHE_HOME/zsh
+zsh
+mkdir "$XDG_CACHE_HOME"/zsh
 
 ## TODO, git-crypt unlock
 
