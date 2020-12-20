@@ -133,6 +133,7 @@ sudo systemctl enable --now pacman-files.timer
 mkdir ~/git && cd ~/git
 git clone https://github.com/wnndgws/scripts.git
 git clone https://github.com/wnndgws/dotfiles.git
+git clone https://github.com/wnndgws/wyman.git
 cd ~/git/dotfiles
 for i in */; do
     stow --restow --target="$HOME" "$i"
