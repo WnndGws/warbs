@@ -79,6 +79,7 @@ echo "Adding multilib to pacman.conf for 32 bit support"
 LINESTART=$(grep -Fnr "[multilib]" /etc/pacman.conf | cut -d : -f1)
 LINEEND=$((LINESTART+1))
 sudo sed -i "${LINESTART},${LINEEND} s/^#//" /etc/pacman.conf
+sudo pacman -Syyuu
 
 # Enable ntp
 echo 'enabling NTP....'
@@ -92,6 +93,9 @@ PollIntervalMaxSec=2048
 EOF'
 sudo systemctl enable --now systemd-timesyncd.service
 sudo timedatectl set-ntp true
+
+# Need a sleep for the internet to sort itself out
+sleep 5
 
 echo "installing pikaur...."
 git clone https://aur.archlinux.org/pikaur.git
