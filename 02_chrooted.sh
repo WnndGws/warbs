@@ -40,7 +40,7 @@ title Arch Linux
 linux /vmlinuz-linux
 initrd /$MICROCODE.img
 initrd /initramfs-linux.img
-options cryptdevice=UUID=$(blkid -s UUID -o value "$DRIVE"2):cryptlvm root=/dev/mapper/vg0-root quiet rw
+options cryptdevice=UUID=$(blkid -s UUID -o value "$DRIVE"2):cryptlvm root=/dev/mapper/vg0-root rw
 EOF
 
 cat /boot/loader/loader.conf <<EOF
