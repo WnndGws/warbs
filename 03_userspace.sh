@@ -117,7 +117,7 @@ sudo pacman -S xorg-server xorg-apps gnu-free-fonts "$VIDEO_DRIVER" xorg-xinit m
 pikaur -S alacritty bspwm sxhkd firefox mpv youtube-dl newsboat nerd-fonts-cascadia-code fasd xdo \
 rofi ripgrep fd bat neofetch exa entr feh neovim lemonbar-xft-git git-crypt starship stow trash-cli \
 pulseaudio-alsa pulsemixer pamixer unclutter-xfixes-git xclip zathura zathura-pdf-mupdf dash dashbinsh \
-fzf xorg-xmodmap zsh-autosuggestions find-the-command zsh-syntax-highlighting tealdeer zsh-history-substring-search python python-pynvim
+fzf xorg-xmodmap zsh-autosuggestions find-the-command zsh-syntax-highlighting tealdeer zsh-history-substring-search python python-pynvim zsh-you-should-use
 
 # Need to create a pacman database for find-the-command to work
 sudo pacman -Fy
@@ -126,16 +126,16 @@ sudo systemctl enable --now pacman-files.timer
 # Step 4
 # Pull and stow dotfiles
 # Set ZSH to use XDG base
-sudo bash -c 'cat > /etc/zsh/zshenv <<EOF
-ZDOTDIR=/home/$USER_NAME/.config/zsh
-EOF'
+#sudo bash -c 'cat > /etc/zsh/zshenv <<EOF
+#ZDOTDIR=/home/$USER_NAME/.config/zsh
+#EOF'
 
 mkdir ~/git && cd ~/git
 git clone https://github.com/wnndgws/scripts.git
 git clone https://github.com/wnndgws/dotfiles.git
 cd ~/git/dotfiles
 for i in */; do
-    stow --restow --target="$HOME"~ "$i"
+    stow --restow --target="$HOME" "$i"
 done
 
 zsh
@@ -145,7 +145,7 @@ mkdir "$XDG_CACHE_HOME"/zsh
 
 # Step 5
 # SSH and GPG
-mkdir $XDG_CONFIG_HOME/gnupg
+mkdir "$XDG_CONFIG_HOME"/gnupg
 printf 'We are past the automatic stage, the rest has to be done manually.
 
 We will set up a gpg key
