@@ -146,7 +146,7 @@ mkdir "$XDG_CACHE_HOME"/zsh
 
 # Step 5
 # SSH and GPG
-mkdir "$XDG_CONFIG_HOME"/gnupg
+#mkdir "$XDG_CONFIG_HOME"/gnupg
 printf 'We are past the automatic stage, the rest has to be done manually.
 
 We will set up a gpg key
