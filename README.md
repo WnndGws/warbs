@@ -10,7 +10,7 @@ The scripts are intended to work only for me, tweaking can be done, but for now 
 The scripts are intented to be run in order as each leaves the system in a state for the next one
 
 # Usage
-1) Live boot arch linux on new computer
+1) Live boot Arch Linux on new computer
 2) `lsblk` to find the drive you want to nuke
 3) `wifi-menu` if using wifi to connect to network (warbs uses iwd, but this is an easier alternative in the live environment)
 4) `pacman -Syy`
