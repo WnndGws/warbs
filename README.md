@@ -1,6 +1,8 @@
 # warbs
 WnndGws's Auto Ricing Bootstrap Script
 
+NB! Warbs is in a very early alpha stage. It currently acts as much as documentation for myself as fulfilling the A+S part of its name
+
 # Motivation
 I am writing this script because I do something often enough (once every 6-8 months) where I want/need to reinstall Arch Linux on one of my computers. I am just following the same steps over and over, so I am attempting to automate this process
 
